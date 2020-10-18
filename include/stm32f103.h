@@ -15,22 +15,6 @@
 #define FLASH_BASE (PERIPH_BASE + 0x22000)
 #define GPIO_BASE  (PERIPH_BASE + 0x10800)
 
-#define GPIOA 0x0000
-#define GPIOB 0x0400
-#define GPIOC 0x0800
-#define GPIOD 0x0C00
-#define GPIOE 0x1000
-#define GPIOF 0x1400
-#define GPIOG 0x1800
-
-#define GPIOA_BASE (GPIO_BASE + GPIOA)
-#define GPIOB_BASE (GPIO_BASE + GPIOB)
-#define GPIOC_BASE (GPIO_BASE + GPIOC)
-#define GPIOD_BASE (GPIO_BASE + GPIOD)
-#define GPIOE_BASE (GPIO_BASE + GPIOE)
-#define GPIOF_BASE (GPIO_BASE + GPIOF)
-#define GPIOG_BASE (GPIO_BASE + GPIOG)
-
 #define RCC_CR       (*(uint32_t * const)(RCC_BASE   + 0x00))
 #define RCC_CFGR     (*(uint32_t * const)(RCC_BASE   + 0x04))
 #define RCC_CIR      (*(uint32_t * const)(RCC_BASE   + 0x08))
@@ -41,30 +25,6 @@
 #define RCC_APB1ENR  (*(uint32_t * const)(RCC_BASE   + 0x1C))
 #define RCC_BDCR     (*(uint32_t * const)(RCC_BASE   + 0x20))
 #define RCC_CSR      (*(uint32_t * const)(RCC_BASE   + 0x24))
-
-#define FLASH_ACR    (*(uint32_t * const)(FLASH_BASE + 0x00))
-
-#define GPIOA_CRL    (*(uint32_t * const)(GPIOA_BASE + 0x00))
-#define GPIOA_CRH    (*(uint32_t * const)(GPIOA_BASE + 0x04))
-#define GPIOA_IDR    (*(uint32_t * const)(GPIOA_BASE + 0x08))
-#define GPIOA_ODR    (*(uint32_t * const)(GPIOA_BASE + 0x0C))
-#define GPIOA_BSRR   (*(uint32_t * const)(GPIOA_BASE + 0x10))
-#define GPIOA_BRR    (*(uint32_t * const)(GPIOA_BASE + 0x14))
-#define GPIOA_LCKR   (*(uint32_t * const)(GPIOA_BASE + 0x18))
-#define GPIOB_CRL    (*(uint32_t * const)(GPIOB_BASE + 0x00))
-#define GPIOB_CRH    (*(uint32_t * const)(GPIOB_BASE + 0x04))
-#define GPIOB_IDR    (*(uint32_t * const)(GPIOB_BASE + 0x08))
-#define GPIOB_ODR    (*(uint32_t * const)(GPIOB_BASE + 0x0C))
-#define GPIOB_BSRR   (*(uint32_t * const)(GPIOB_BASE + 0x10))
-#define GPIOB_BRR    (*(uint32_t * const)(GPIOB_BASE + 0x14))
-#define GPIOB_LCKR   (*(uint32_t * const)(GPIOB_BASE + 0x18))
-#define GPIOC_CRL    (*(uint32_t * const)(GPIOC_BASE + 0x00))
-#define GPIOC_CRH    (*(uint32_t * const)(GPIOC_BASE + 0x04))
-#define GPIOC_IDR    (*(uint32_t * const)(GPIOC_BASE + 0x08))
-#define GPIOC_ODR    (*(uint32_t * const)(GPIOC_BASE + 0x0C))
-#define GPIOC_BSRR   (*(uint32_t * const)(GPIOC_BASE + 0x10))
-#define GPIOC_BRR    (*(uint32_t * const)(GPIOC_BASE + 0x14))
-#define GPIOC_LCKR   (*(uint32_t * const)(GPIOC_BASE + 0x18))
 
 #define RCC_CR_HSION   0x00000001
 #define RCC_CR_HSIRDY  0x00000002
@@ -285,6 +245,8 @@
 #define RCC_CSR_WWDGRSTF        (0x1 << 30)
 #define RCC_CSR_LPWRRSTF        (0x1 << 31)
 
+#define FLASH_ACR (*(uint32_t * const)(FLASH_BASE + 0x00))
+
 #define FLASH_ACR_LATENCY       (0x7 << 0)
 #define FLASH_HLFCYA            (0x1 << 3)
 #define FLASH_PRFTBE            (0x1 << 4)
@@ -293,6 +255,30 @@
 #define FLASH_ACR_LATENCY_0     (0x0 << 0)
 #define FLASH_ACR_LATENCY_1     (0x1 << 0)
 #define FLASH_ACR_LATENCY_2     (0x2 << 0)
+
+#define GPIOA 0x0000
+#define GPIOB 0x0400
+#define GPIOC 0x0800
+#define GPIOD 0x0C00
+#define GPIOE 0x1000
+#define GPIOF 0x1400
+#define GPIOG 0x1800
+
+#define GPIOx_OFFSET_CRL  0x00
+#define GPIOx_OFFSET_CRH  0x04
+#define GPIOx_OFFSET_IDR  0x08
+#define GPIOx_OFFSET_ODR  0x0C
+#define GPIOx_OFFSET_BSRR 0x10
+#define GPIOx_OFFSET_BRR  0x14
+#define GPIOx_OFFSET_LCKR 0x18
+
+#define GPIOx_CRL(p)  (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_CRL))
+#define GPIOx_CRH(p)  (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_CRH))
+#define GPIOx_IDR(p)  (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_IDR))
+#define GPIOx_ODR(p)  (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_ODR))
+#define GPIOx_BSRR(p) (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_BSRR))
+#define GPIOx_BRR(p)  (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_BRR))
+#define GPIOx_LCKR(p) (*(uint32_t * const)(GPIO_BASE + p + GPIOx_OFFSET_LCKR))
 
 #define GPIO_CR_MODE 0x3
 #define GPIO_CR_CNF  0xC

@@ -8,6 +8,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(SOURCE
 	src/startup.c
 	src/vectors.c
+	src/gpio.c
 	src/main.c
 )
 
