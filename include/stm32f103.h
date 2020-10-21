@@ -11,9 +11,13 @@
 #define SET_REG(reg, mask, value) \
   (reg) = ((reg) & (mask)) | value
 
-#define RCC_BASE   (PERIPH_BASE + 0x21000)
-#define FLASH_BASE (PERIPH_BASE + 0x22000)
-#define GPIO_BASE  (PERIPH_BASE + 0x10800)
+#define RCC_BASE     (PERIPH_BASE + 0x21000)
+#define FLASH_BASE   (PERIPH_BASE + 0x22000)
+#define GPIO_BASE    (PERIPH_BASE + 0x10800)
+
+#define USBFS_BASE    (PERIPH_BASE + 0x05C00)
+#define USB_SRAM_BASE (PERIPH_BASE + 0x06000)
+#define CAN_SRAM_BASE USB_SRAM_BASE
 
 #define RCC_CR       (*(uint32_t * const)(RCC_BASE   + 0x00))
 #define RCC_CFGR     (*(uint32_t * const)(RCC_BASE   + 0x04))
@@ -295,5 +299,52 @@
 #define GPIO_CR_CNF_OUT_OPENDRAIN (0x1 << 2)
 #define GPIO_CR_CNF_ALT_PUSHPULL  (0x2 << 2)
 #define GPIO_CR_CNF_ALT_OPENDRAIN (0x3 << 2)
+
+#define USB_CNTR  (*(uint32_t * const)(USBFS_BASE + 0x40))
+#define USB_ISTR  (*(uint32_t * const)(USBFS_BASE + 0x44))
+#define USB_FNR   (*(uint32_t * const)(USBFS_BASE + 0x48))
+#define USB_DADDR (*(uint32_t * const)(USBFS_BASE + 0x4C))
+
+#define USB_CNTR_FRES    (0x1 <<  0)
+#define USB_CNTR_PDWN    (0x1 <<  1)
+#define USB_CNTR_LP_MODE (0x1 <<  2)
+#define USB_CNTR_FSUSP   (0x1 <<  3)
+#define USB_CNTR_RESUME  (0x1 <<  4)
+#define USB_CNTR_ESOFM   (0x1 <<  8)
+#define USB_CNTR_SOFM    (0x1 <<  9)
+#define USB_CNTR_RESETM  (0x1 << 10)
+#define USB_CNTR_SUSPM   (0x1 << 11)
+#define USB_CNTR_WKUPM   (0x1 << 12)
+#define USB_CNTR_ERRM    (0x1 << 13)
+#define USB_CNTR_PMAOVRM (0x1 << 14)
+#define USB_CNTR_CTRM    (0x1 << 15)
+
+#define USB_ISTR_EP_ID   0x0F
+#define USB_ISTR_DIR    (0x1 <<  4)
+#define USB_ISTR_ESOF   (0x1 <<  8)
+#define USB_ISTR_SOF    (0x1 <<  9)
+#define USB_ISTR_RESET  (0x1 << 10)
+#define USB_ISTR_SUSP   (0x1 << 11)
+#define USB_ISTR_WKUP   (0x1 << 12)
+#define USB_ISTR_ERR    (0x1 << 13)
+#define USB_ISTR_PMAOVR (0x1 << 14)
+#define USB_ISTR_CTR    (0x1 << 15)
+
+#define USB_FNR_FN   0x3FF
+#define USB_FNR_LSOF 0x003
+#define USB_FNR_LCK  (0x1 << 13)
+#define USB_FNR_RXDM (0x1 << 14)
+#define USB_FNR_RXDP (0x1 << 15)
+
+#define USB_DADDR_ADD0 (0x1 << 0)
+#define USB_DADDR_ADD1 (0x1 << 1)
+#define USB_DADDR_ADD2 (0x1 << 2)
+#define USB_DADDR_ADD3 (0x1 << 3)
+#define USB_DADDR_ADD4 (0x1 << 4)
+#define USB_DADDR_ADD5 (0x1 << 5)
+#define USB_DADDR_ADD6 (0x1 << 6)
+#define USB_DADDR_EF   (0x1 << 7)
+
+#define USB_BTABLE_BTABLE 0x7F88
 
 #endif
