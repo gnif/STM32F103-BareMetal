@@ -1,5 +1,6 @@
 #include "stm32f103.h"
 #include "gpio.h"
+#include "delay.h"
 
 int main(void)
 {
@@ -9,6 +10,7 @@ int main(void)
   for(int i = 0;; ++i)
   {
     GPIO_PIN_TOG(GPIOC, 13);
-    for(int x = 0; x < 1000000; ++x) {}
+    for(int x = 0; x < 250; ++x)
+      DELAY_US(1000);
   }
 }
